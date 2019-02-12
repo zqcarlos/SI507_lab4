@@ -84,12 +84,98 @@ My My My The - G
 """print("\n\nNEW FAKE MOVIE TITLES CREATED BELOW...\n\n")
 # Write your code to enact all of this below"""
 
+"""import pandas as pd
+import numpy as np
+
+def SI507_HW4_part_1():
+    
+    data=pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_dataset_group.csv')
+    data_nonan = data.fillna('NA')
+    date = data_nonan['Release Date']
+    for i in range(len(date)):
+        if len(date[i]) < 9:
+            date[i] = '0' + date[i]
+    data_nonan.to_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv')
+    return
+SI507_HW4_part_1"""
+
 import pandas as pd
 import numpy as np
-data=pd.read_csv('https://github.com/zqcarlos/SI507_lab4/blob/master/movies_dataset_group.csv')
-data_nonan = data.fillna('NA')
-date = data_nonan['Release Date']
-for i in range(len(date)):
-    if len(date[i]) < 9:
-        date[i] = '0' + date[i]
-data_nonan.to_csv('movies_clean.csv')
+import itertools
+import random
+
+def part_1():
+    data=pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_dataset_group.csv')
+    date = data['Release Date']
+    for i in range(len(date)):
+        if len(date[i]) < 9:
+            date[i] = '0' + date[i]
+    date_nonan = data.fillna('NA')
+    date_nonan.to_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv')
+    return
+
+def part_2():
+    data_2 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
+    data_2_test = data_2['MPAA Rating']
+    x = np.zeros(len(data_2_test))
+    for i in range(len(data_2_test)):
+        if data_2_test[i] == 'G':
+            x[i]=1
+        elif data_2_test[i] == 'PG':
+            x[i] = 2
+        elif data_2_test[i] == 'PG-13':
+            x[i] = 3
+        elif data_2_test[i] == 'R':
+            x[i] = 4
+        elif data_2_test[i] == 'NC-17':
+            x[i] = 5
+    return(np.median(x))
+
+
+def part_3_1():
+    data_3 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
+    data_3_fake_name = data_3['Title']
+    data_3_fake_name_list = data_3_fake_name.sample(15)
+    iter = itertools.cycle(data_3_fake_name_list)
+    j=0
+    fake_name = []
+    for i in iter:
+        if len(data_3_fake_name_list)<22:
+            fake_name.append(i+' '+i)
+            j = j + 1
+            if j == 15:
+                break
+    return(fake_name)
+
+def part_3_2():
+    data_3 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
+    data_3_rate = data_3['MPAA Rating']
+    data_3_rate_list = data_3_rate.sample(15)
+    iter = itertools.cycle(data_3_rate_list)
+    a = 0
+    fake_rate = []
+    for b in iter:
+        fake_rate.append(b)
+        a = a +1
+        if a == 15:
+            break
+    return(fake_rate)
+
+def test():
+    part_1()
+    part_2()
+    a = part_3_1()
+    b = part_3_2()
+    sample_fake_movies = []
+    for i in range(len(a)):
+        sample_fake_movies.append(a[i] + ' - ' + b[i])
+        print(sample_fake_movies[i])
+
+
+test()
+
+
+
+
+
+
