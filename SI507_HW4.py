@@ -81,5 +81,15 @@ My With the of Why Narc Into - Not Rated
 My My My The - G
 """
 
-print("\n\nNEW FAKE MOVIE TITLES CREATED BELOW...\n\n")
-# Write your code to enact all of this below
+"""print("\n\nNEW FAKE MOVIE TITLES CREATED BELOW...\n\n")
+# Write your code to enact all of this below"""
+
+import pandas as pd
+import numpy as np
+data=pd.read_csv('https://github.com/zqcarlos/SI507_lab4/blob/master/movies_dataset_group.csv')
+data_nonan = data.fillna('NA')
+date = data_nonan['Release Date']
+for i in range(len(date)):
+    if len(date[i]) < 9:
+        date[i] = '0' + date[i]
+data_nonan.to_csv('movies_clean.csv')
