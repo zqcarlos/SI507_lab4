@@ -104,6 +104,12 @@ import numpy as np
 import itertools
 import random
 
+<<<<<<< HEAD
+def SI507_HW4():
+    test()
+
+=======
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
 def part_1():
     data=pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_dataset_group.csv')
     date = data['Release Date']
@@ -114,10 +120,19 @@ def part_1():
     date_nonan.to_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv')
     return
 
+<<<<<<< HEAD
+def median_rating():
+    data_2 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
+    data_2_test = data_2['MPAA Rating']
+    x = np.zeros(len(data_2_test))
+    median_rating_str = ' '
+    median_rating_1 = 0
+=======
 def part_2():
     data_2 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
     data_2_test = data_2['MPAA Rating']
     x = np.zeros(len(data_2_test))
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
     for i in range(len(data_2_test)):
         if data_2_test[i] == 'G':
             x[i]=1
@@ -129,7 +144,24 @@ def part_2():
             x[i] = 4
         elif data_2_test[i] == 'NC-17':
             x[i] = 5
+<<<<<<< HEAD
+    median_rating_1 = np.median(x)
+    if median_rating_1 == 1.0:
+        median_rating_str = 'G'
+    elif median_rating_1 == 2.0:
+        median_rating_str = 'PG'
+    elif median_rating_1 == 3.0:
+        median_rating_str = 'PG-13'
+    elif median_rating_1 == 4.0:
+        median_rating_str = 'R'
+    elif median_rating_1 == 5.0:
+        median_rating_str = 'NC-17'
+    print(median_rating_str)
+    return(median_rating_str)
+
+=======
     return(np.median(x))
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
 
 
 def part_3_1():
@@ -139,17 +171,42 @@ def part_3_1():
     iter = itertools.cycle(data_3_fake_name_list)
     j=0
     fake_name = []
+<<<<<<< HEAD
+#    for i in iter:
+#        if len(data_3_fake_name_list)<22:
+#            fake_name.append(i+' '+i)
+#            j = j + 1
+#            if j == 15:
+#                break
+    for i in iter:
+        if len(i)<23:
+            fake_name.append(i + i[::-1])
+            j = j + 1
+        elif len(i)<45:
+            fake_name.append(i[::-1])
+            j = j + 1
+        else:
+            fake_name.append(i[1:45])
+            j = j + 1
+        if j == 15:
+            break
+=======
     for i in iter:
         if len(data_3_fake_name_list)<22:
             fake_name.append(i+' '+i)
             j = j + 1
             if j == 15:
                 break
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
     return(fake_name)
 
 def part_3_2():
     data_3 = pd.read_csv('/Users/zhouqi/Desktop/winter19/SI507/lab/lab4/movies_clean.csv',keep_default_na=False)
     data_3_rate = data_3['MPAA Rating']
+<<<<<<< HEAD
+    data_3_rate.replace('NA','Not Rated',inplace=True)
+=======
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
     data_3_rate_list = data_3_rate.sample(15)
     iter = itertools.cycle(data_3_rate_list)
     a = 0
@@ -161,6 +218,24 @@ def part_3_2():
             break
     return(fake_rate)
 
+<<<<<<< HEAD
+def sample_fake_movies():
+    a = part_3_1()
+    b = part_3_2()
+    sample_fake_movie = []
+    for i in range(len(a)):
+        sample_fake_movie.append(a[i] + ' - ' + b[i])
+        print(sample_fake_movie[i])
+
+def test():
+    part_1()
+    median_rating()
+    sample_fake_movies()
+
+
+
+SI507_HW4()
+=======
 def test():
     part_1()
     part_2()
@@ -176,6 +251,7 @@ test()
 
 
 
+>>>>>>> f48da97ccd5e67ae34baef47be83e24e3c5c6497
 
 
 
